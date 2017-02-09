@@ -20,6 +20,8 @@ public class Movement : MonoBehaviour
 	private bool hasJumped = false;
 	private bool grounded = true;
 
+	private float delta = 0.01f;
+
 	void Awake ()
 	{
 		// Create a layer mask for the floor layer.
@@ -42,19 +44,23 @@ public class Movement : MonoBehaviour
 		Turning ();
 
 		if (hasJumped && grounded) {
+			Debug.Log ("do the jump");
 			hasJumped = false;
-			grounded = false;
 			Jump ();
+			grounded = false;
 		}
 
 	}
 
 	void Update() {
-		if (!grounded && playerRigidbody.velocity.y == 0.0f) {
+		if (!grounded && playerRigidbody.velocity.y <= delta && playerRigidbody.velocity.y > -delta) {
+			Debug.Log ("ground");
+			hasJumped = false;
 			grounded = true;
 		}
 
 		if (Input.GetButton ("Jump")) {
+			Debug.Log ("jump");
 			hasJumped = true;
 		}
 	}
