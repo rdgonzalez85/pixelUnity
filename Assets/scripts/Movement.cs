@@ -44,7 +44,6 @@ public class Movement : MonoBehaviour
 		Turning ();
 
 		if (hasJumped && grounded) {
-			Debug.Log ("do the jump");
 			hasJumped = false;
 			Jump ();
 			grounded = false;
@@ -54,13 +53,11 @@ public class Movement : MonoBehaviour
 
 	void Update() {
 		if (!grounded && playerRigidbody.velocity.y <= delta && playerRigidbody.velocity.y > -delta) {
-			Debug.Log ("ground");
 			hasJumped = false;
 			grounded = true;
 		}
 
 		if (Input.GetButton ("Jump")) {
-			Debug.Log ("jump");
 			hasJumped = true;
 		}
 	}
